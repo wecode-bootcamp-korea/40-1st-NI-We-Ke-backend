@@ -4,12 +4,16 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const { appDataSource } = require("./src/models/data-source")
+const { routes } = require("./src/routes");
+
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use(morgan("combined"));
+
+app.use(routes);
 
 
 app.get('/ping'  , function (req,res ,next){
