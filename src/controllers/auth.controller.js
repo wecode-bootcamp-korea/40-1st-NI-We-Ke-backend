@@ -19,6 +19,10 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
+    if( !email || ! password) {
+      throw new Error("Key Error")
+    }
 
     const accessToken = await authService.signIn(email, password);
 

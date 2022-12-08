@@ -10,14 +10,19 @@ const validateEmail = (email) => {
     }
   };
 
-    const reg = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$";
-    const txt = "aaaa"
-    if( !reg.tesst(txt)) {
-      alert("비밀번호 정규식 규칙 위반!!");
-      return false
+  const validatePassword = (password) => {
+    const rez = new RegExp(
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+    );
+  
+    if (!rez.test(email)) {
+      const err = new Error("invalid password");
+      err.statusCode = 400;
+      throw err;
     }
+  };
 
   
   module.exports = {
-    validateEmail,
+    validateEmail,validatePassword
   };

@@ -36,7 +36,7 @@ const signIn = async (email, password) => {
     throw err;
   }
 
-  return jwt.sign({ sub: user.id}, process.env.JWT_SECRET);
+  return jwt.sign({ userId: user.id}, process.env.JWT_SECRET);
 };
 
 module.exports = { signUp, signIn };
