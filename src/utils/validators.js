@@ -9,6 +9,14 @@ const validateEmail = (email) => {
       throw err;
     }
   };
+
+    const reg = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$";
+    const txt = "aaaa"
+    if( !reg.tesst(txt)) {
+      alert("비밀번호 정규식 규칙 위반!!");
+      return false
+    }
+
   
   module.exports = {
     validateEmail,

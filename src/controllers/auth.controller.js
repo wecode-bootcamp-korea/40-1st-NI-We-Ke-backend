@@ -4,9 +4,13 @@ const signUp = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    if( !email || ! password) {
+      throw new Error("Key Error")
+    }
+
     await authService.signUp(email, password);
 
-    res.status(201).end();
+    return res.status(201).json({message : "success"})
   } catch (err) {
     res.status(err.statusCode || 400).json({ message: err.message });
   }
