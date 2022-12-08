@@ -22,14 +22,14 @@ const signUp = async (email, password) => {
 
 const signIn = async (email, password) => {
   const user = await userDao.getUserByEmail(email);
-  console.log(user);
+
   if (!user) {
     const err = new Error('specified user does not exist');
     err.statusCode = 404;
     throw err;
   }
   const result = await bcrypt.compare(password, user.password);
-// 2bwqefjweifjesofj
+
   if (!result) {
     const err = new Error('invalid password');
     err.statusCode = 401;
