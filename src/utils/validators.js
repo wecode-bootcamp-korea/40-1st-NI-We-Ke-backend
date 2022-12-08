@@ -15,7 +15,7 @@ const validateEmail = (email) => {
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
     );
   
-    if (!rez.test(email)) {
+    if (!rez.test(password)) {
       const err = new Error("invalid password");
       err.statusCode = 400;
       throw err;
@@ -24,5 +24,6 @@ const validateEmail = (email) => {
 
   
   module.exports = {
-    validateEmail,validatePassword
+    validateEmail,
+    validatePassword
   };
