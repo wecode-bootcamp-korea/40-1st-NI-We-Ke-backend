@@ -14,7 +14,7 @@ const signUp = async (email, password) => {
     const err = new Error('duplicated email');
     err.statusCode = 400;
     throw err;
-  }
+   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
   await userDao.createUser(email, hashedPassword);
@@ -36,7 +36,10 @@ const signIn = async (email, password) => {
     throw err;
   }
 
-  return jwt.sign({ userId: user.id}, process.env.JWT_SECRET);
+  const accessToken = jwt.sign({ userId: user.id}, process.env.JWT_SECRET);
+
+  return accessToken;
 };
 
 module.exports = { signUp, signIn };
+

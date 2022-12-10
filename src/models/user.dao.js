@@ -9,7 +9,7 @@ const createUser = async (email, password) => {
     ) VALUES (
       ?,
       ?
-    )
+    ) 
     `,
     [email, password]
   );
