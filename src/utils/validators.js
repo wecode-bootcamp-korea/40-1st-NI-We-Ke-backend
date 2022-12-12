@@ -12,7 +12,7 @@ const validateEmail = (email) => {
 
   const validatePassword = (password) => {
     const PASSWORD_REG = new RegExp(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/ 
     );
   
     if (!PASSWORD_REG.test(password)) {

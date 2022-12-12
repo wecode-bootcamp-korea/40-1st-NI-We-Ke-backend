@@ -4,15 +4,16 @@ const cartDao = require("../models/cart.Dao");
 const { validateToken } = require("../utils/validators");
 
 const addCart = async ( userId, accessToken ) => {
+  validateToken(accessToken)
 
-  const checkToken = await cartDao.addCart(token);
+  const checkToken = await cartDao.addCart(accessToken);
 
-  if(!token) {
+  if(!accessToken) {
     const err = new Error('Access Denied');
     err.statusCode = 404;
     throw err;
   }
-  await cartDao.addCart(token)
+  await cartDao.addCart(accessToken)
 }
 
 

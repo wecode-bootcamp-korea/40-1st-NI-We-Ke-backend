@@ -10,12 +10,12 @@ const cartService = require("../services/cart.service")
 const addCart = async (req, res) => {
 //내생각에는 장바구니에 넣기위해 JWT 토큰을 한번 확인해야할 것 같아 일단 고 
   try {
-    const { userId, userToken } = req.body; //Token을 실제로 담고 있는 변수 찾아서 수정 필요. 
+    const { userId, accessToken } = req.body; //Token을 실제로 담고 있는 변수 찾아서 수정 필요. 
 
-  if ( !userId === userToken ) {
+  if ( !userId === accessToken ) {
       throw new Error("Token Error");
   }
-     await cartService.addCart(userId, userToken);
+     await cartService.addCart(userId, accessToken);
     
      return res.status(201).json({message : " Added to Cart! "})
   } catch(err) {
