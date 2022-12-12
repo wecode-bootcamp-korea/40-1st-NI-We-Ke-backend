@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { authRouter } = require("./auth.router");
-const searchRouter = require("./search");
+const searchRouter = require("./product");
 
 
 

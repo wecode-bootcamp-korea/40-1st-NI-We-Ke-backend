@@ -35,21 +35,3 @@ app.listen(PORT, () => {
 
 
 
-app.get("/search/:inputId", async (req, res) => {
-  const userId = req.params.inputId;
-  const user = await appDataSource.manager.query(
-    `SELECT 
-       products.name,
-       categories.name,
-       product_options.price
-       FROM products
-       JOIN categories ON categories.id = products.category_id 
-       LEFT JOIN product_options ON product_options.product_id = products.id
-       WHERE categories.id = ${userId}
-      `
-  );
-});     
-
-
-
-
