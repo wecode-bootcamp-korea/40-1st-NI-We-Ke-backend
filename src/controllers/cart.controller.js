@@ -5,23 +5,25 @@
 시스템이 구현하는 비지니스 로직은 다음 레이어로 넘어간다. 
 */
 
-const cartService = require("../services/cart.service")
+const cartService = require("../services/cart.service");
+const userId = require("../utils/auth");
 
 const addCart = async (req, res) => {
-//내생각에는 장바구니에 넣기위해 JWT 토큰을 한번 확인해야할 것 같아 일단 고 
-  try {
-    const { userId, accessToken } = req.body; //Token을 실제로 담고 있는 변수 찾아서 수정 필요. 
 
-  if ( !userId === accessToken ) {
-      throw new Error("Token Error");
-  }
-     await cartService.addCart(userId, accessToken);
-    
-     return res.status(201).json({message : " Added to Cart! "})
-  } catch(err) {
-     res.status(err.statusCode || 400).json({ message : err.message })
-  }
-}
+  const {productoptionId, quantity} = req.body;
+
+  const userId = req.user.id
+  //console.log(userId)
+};
+
+//이미 token을 확인하는 과정에서 userId의 정보가 들어왔었던 것이고 
+//우리는 클라이언트로부터 넣을 정보만 body로 받으면 되는 것이다. 
+//그리고 auth.js에서 user의 정보를 req.user에 넣어주었고
+//userId라는 변수에 그 값을 다시 저장한 것이다.
+//그리고 다음 logic으로 넘어가주면 되는 것. 
+
+
+
 
 const removeCart = async (req, res) => {
   try {

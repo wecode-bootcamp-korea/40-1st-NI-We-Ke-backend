@@ -5,7 +5,7 @@ const userDao = require('../models/user.dao');
 const { validateEmail, validatePassword } = require('../utils/validators');
 
 const signUp = async (email, password) => {
-  validateEmail(email);
+validateEmail(email);
   validatePassword(password);
 
   const user = await userDao.getUserByEmail(email);
