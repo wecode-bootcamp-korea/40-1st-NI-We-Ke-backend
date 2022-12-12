@@ -1,9 +1,9 @@
 const express = require("express");
 
-const searchController = require('../controllers/product.controller')
+const productController = require('../controllers/product.controller')
 
-const searchRouter = express.Router();
+const productRouter = express.Router();
 
-searchRouter.get("/category/:categories_name" , searchController.getProductsByCategoryId );
+productRouter.get("/category/:categories_name" , productController.getProductsByCategoryId );
 
-module.exports = searchRouter;
+module.exports = {productRouter};

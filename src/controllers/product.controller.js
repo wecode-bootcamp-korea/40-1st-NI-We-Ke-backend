@@ -10,7 +10,7 @@ const getProductsByCategoryId  = async(req,res) => {
         const result = await searchService.getProductsByCategoryId (categoryId);
 
         return res.status(200).json({message : result})
-    }catch (err) {
+    } catch (err) {
         res.status(err.statusCode || 400).json({message : err.message});
     }
 };
