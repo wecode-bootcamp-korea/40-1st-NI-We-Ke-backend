@@ -1,5 +1,5 @@
 const cartService = require("../services/cart.service");
-const { tokenRequired } = require("../utils/auth");
+//const { tokenRequired } = require("../utils/auth");
 
 const createCart = async (req, res) => {
   try {
@@ -9,6 +9,21 @@ const createCart = async (req, res) => {
     await cartService.createCart(productoptionId, quantity, userId);
 
     res.status(201).json({ message: " Cart Created!" });
+  } catch (err) {
+    res.status(err.statusCode || 401).json({ message: err.message });
+  }
+};
+//먼저생각을 해보자. cart에 들어있는 모든 아이템들의 정보를 가져온다고 생각했을때
+//
+
+const getCart = async (req, res) => {
+  try {
+    const { productoptionId, quantity } = req.body;
+    const userId = req.user.id;
+
+    await cartService.getCart(productoptionId, quantity, userId);
+
+    res.status(201).json({ message: " Whole products added in Cart " });
   } catch (err) {
     res.status(err.statusCode || 401).json({ message: err.message });
   }
@@ -35,4 +50,4 @@ const createCart = async (req, res) => {
 //   }
 // };
 
-module.exports = { createCart };
+module.exports = { createCart, getCart };
