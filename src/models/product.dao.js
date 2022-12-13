@@ -1,4 +1,4 @@
-const { appDataSource} = require('./data-source');
+const {appDataSource} = require('./data-source');
 
 const getProductsByCategoryId = async(categoryId) => {
     return await appDataSource.query(
