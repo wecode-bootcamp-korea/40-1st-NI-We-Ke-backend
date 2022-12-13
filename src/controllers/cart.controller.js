@@ -1,22 +1,14 @@
-/* controller 파트는 클라이언트 시스템과 직접적으로 연결되는 부분이다. 
-여기서 엔드포인트를 정의하고 
-요청을 읽어 드리는 로직을 구현해야한다. 
-시스템이 구현하는 비지니스 로직은 다음 레이어로 넘어간다. 
-*/
-
-const { tokenRequired } = require("../utils/auth");
 const cartService = require("../services/cart.service");
+const { tokenRequired } = require("../utils/auth");
 
-const addCart = async (req, res) => {
+const createCart = async (req, res) => {
   try {
-    const { userId, productoptionId, quantity } = req.body;
+    const { productoptionId, quantity } = req.body;
+    const userId = req.user.id;
 
-    userId = tokenRequired.user;
+    await cartService.createCart(productoptionId, quantity, userId);
 
-    if (!productoptionId || !quantity) {
-      throw new Error("Key Error");
-    }
-    res.status(200).json({ message: "Created Cart" });
+    res.status(201).json({ message: " Cart Created!" });
   } catch (err) {
     res.status(err.statusCode || 401).json({ message: err.message });
   }
@@ -28,19 +20,19 @@ const addCart = async (req, res) => {
 //userId라는 변수에 그 값을 다시 저장한 것이다.
 //그리고 다음 logic으로 넘어가주면 되는 것.
 
-const removeCart = async (req, res) => {
-  try {
-    const { userId, userToken } = req.body;
+// const removeCart = async (req, res) => {
+//   try {
+//     const { userId, userToken } = req.body;
 
-    if (!userId === !userToken) {
-      throw new Error("Token Error");
-    }
-    await cartService.removeCart(userId, userToken);
+//     if (!userId === !userToken) {
+//       throw new Error("Token Error");
+//     }
+//     await cartService.removeCart(userId, userToken);
 
-    return res.status(201).json({ message: " Removed from Cart! " });
-  } catch (err) {
-    res.status(err.statusCode || 400).json({ message: err.message });
-  }
-};
+//     return res.status(201).json({ message: " Removed from Cart! " });
+//   } catch (err) {
+//     res.status(err.statusCode || 400).json({ message: err.message });
+//   }
+// };
 
-module.exports = { addCart, removeCart };
+module.exports = { createCart };
