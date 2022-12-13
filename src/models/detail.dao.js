@@ -14,12 +14,17 @@ const getDetailByProductId = async (productId) => {
             poi.image_url6,
             c.name,
             po.price,
-            sizes.size
+            sizes.size,
+            re.id,
+            re.reviews,
+            re.user_id,
+            re.product_id
             FROM products p
             JOIN categories c ON c.id=p.category_id
             JOIN product_options po ON p.id=po.product_id
             JOIN product_option_images poi ON po.id = poi.product_option_id
             JOIN sizes ON sizes.id = po.size_id
+            JOIN reviews re ON re.product_id =p.id
             WHERE p.id = ?;
         `, [productId]
     );
