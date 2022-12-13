@@ -1,24 +1,24 @@
 const { appDataSource } = require("./data-source");
 
-
-
+//밑에 user를 가져와야한다.
 const addCart = async (req, res) => {
-
-  //user를 가져와야한다. user를! 
-
-  const { productoptionId,quantity } = req.body; 
+  const { userId, productoptionId, quantity } = req.body;
 
   await appDataSource.query(
-    `INSERT INTO carts(
+    `
+    INSERT INTO carts(
       user_id, 
       product_option_id, 
       quantity
-    ) VALUES (?,?,?)
-    `,
-    [userId, productoptionId]
+    ) 
+    VALUES 
+    (
+    ?,
+    ?,
+    ?
+    )`,
+    [userId, productoptionId, quantity]
   );
-}
+};
 
-
-
-module.exports = { addCart }
+module.exports = { addCart };
