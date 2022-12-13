@@ -3,7 +3,7 @@ const SearchProductController = require('../controllers/search-product-name.cont
 const SearchProductRouter = express.Router();
 
 
-SearchProductRouter.get = ('/product' ,SearchProductController.searchProducT);
+SearchProductRouter.get('/product' ,SearchProductController.searchProducT);
 
 module.exports = { SearchProductRouter };
 

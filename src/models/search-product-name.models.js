@@ -1,9 +1,6 @@
 const {appDataSource} = require("./data-source");
 
 const searchProductName  = async(ProductName) => {
-    console.log('--------')
-    console.log(ProductName, "dao")
-    console.log('--------')
     return await appDataSource.query(
         `
         SELECT
