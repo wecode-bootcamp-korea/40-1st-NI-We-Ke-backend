@@ -11,8 +11,10 @@ const getProductsByCategoryId  = async(req,res) => {
 
         return res.status(200).json({message : result})
     } catch (err) {
+        
         res.status(err.statusCode || 400).json({message : err.message});
     }
+    
 };
 
 module.exports = {getProductsByCategoryId };
