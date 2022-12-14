@@ -10,9 +10,9 @@ const createOrder = async (req,res) => {
             throw new Error("Key Error")
         }
         
-        await orderService.createOrder( userId, price, quantity);
+        const result = await orderService.createOrder( userId, price, quantity);
 
-        return res.status(201).json({message:"Add Order Success!!"})
+        return res.status(201).json({result})
     }catch (err) {
         console.log(err)
         res.status(err.statusCode || 400).json({mesaage : err.mesaage});
