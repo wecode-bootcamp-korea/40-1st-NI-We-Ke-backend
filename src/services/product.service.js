@@ -4,6 +4,8 @@ const getProductsByCategoryId  = async(categoryId) => {
     return productDao.getProductsByCategoryId(categoryId);
 };
 
+const getProductByName = async(productNames) => {
+    return productDao.getProductByName(productNames);
+};
 
-
-module.exports = {getProductsByCategoryId }
+module.exports = {getProductsByCategoryId, getProductByName }

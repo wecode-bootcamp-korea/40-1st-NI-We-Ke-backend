@@ -1,4 +1,4 @@
-const searchService = require('../services/product.service');
+const productService = require('../services/product.service');
 
 const getProductsByCategoryId  = async(req,res) => {
     try{
@@ -7,7 +7,7 @@ const getProductsByCategoryId  = async(req,res) => {
         if(!categoryId) {
             throw new Error("Key Error")
         }
-        const result = await searchService.getProductsByCategoryId (categoryId);
+        const result = await productService.getProductsByCategoryId (categoryId);
 
         return res.status(200).json({message : result})
     } catch (err) {
@@ -17,4 +17,22 @@ const getProductsByCategoryId  = async(req,res) => {
     
 };
 
-module.exports = {getProductsByCategoryId };
+const getProductByName = async(req,res)=> {
+    try{
+        const { productName } = req.query
+
+        
+
+        if(!productName){
+            throw new Error("No Name Error")
+        }
+
+        const result = await productService.getProductByName(productName);
+
+        return res.status(200).json({message : result})
+    }catch (err){
+        res.status(err.statusCode || 400).json({message : err.message});
+    }
+};
+
+module.exports = {getProductsByCategoryId, getProductByName };
