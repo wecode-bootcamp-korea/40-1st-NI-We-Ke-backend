@@ -69,7 +69,7 @@ const deleteCartsById = async (userId, cartId) => {
   return await appDataSource.query(
     `DELETE 
     FROM carts c
-    WHERE c.user_id =? AND c.id=?
+    WHERE c.user_id = ? AND c.id = ?;
     `,
     [userId, cartId]
   );

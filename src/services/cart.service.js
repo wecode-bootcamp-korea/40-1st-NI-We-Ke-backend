@@ -25,7 +25,6 @@ const getCartsByUserId = async (userId) => {
 // };
 
 //장바구니 선택 지우기
-//얘는 query parameter를 받아올 것이다. /cart/:id 이 id를 받아올 것이다.
 const deleteCartsById = async (userId, cartId) => {
   return await cartDao.deleteCartsById(userId, cartId);
 };
