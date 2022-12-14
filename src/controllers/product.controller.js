@@ -17,4 +17,7 @@ const getProductsByCategoryId  = async(req,res) => {
     
 };
 
+
+
+
 module.exports = {getProductsByCategoryId };
