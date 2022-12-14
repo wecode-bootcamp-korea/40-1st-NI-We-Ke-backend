@@ -8,4 +8,3 @@ const getProductsByCategoryId  = async(categoryId) => {
 
 module.exports = {getProductsByCategoryId }
 
-module.exports = {getProductsByCategoryId }
