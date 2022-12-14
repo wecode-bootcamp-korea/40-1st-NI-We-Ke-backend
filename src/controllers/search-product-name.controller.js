@@ -1,16 +1,16 @@
-const searchProductService = require("../services/search-product-name.service");
+const productService = require("../services/search-product-name.service");
 
-const searchProducT = async(req,res)=> {
+const searchProductByName = async(req,res)=> {
     try{
         const { productName } = req.query
 
-        console.log(productName)
+        
 
         if(!productName){
             throw new Error("No Name Error")
         }
 
-        const result = await searchProductService.searchProducT(productName);
+        const result = await productService.searchProductByName(productName);
 
         return res.status(200).json({message : result})
     }catch (err){
@@ -19,4 +19,4 @@ const searchProducT = async(req,res)=> {
 };
 
 
-module.exports= { searchProducT };
+module.exports= { searchProductByName };

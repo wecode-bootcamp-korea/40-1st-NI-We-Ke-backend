@@ -1,14 +1,9 @@
-const SearhProductDao = require("../models/search-product-name.models");
+const searhProductDao = require("../models/search-product-name.models");
 
-const searchProducT = async(name) => {
-    const user = await SearhProductDao.searchProductName(name);
+const searchProductByName = async(ProductName) => {
+    const productName = await searhProductDao.getProductByName (ProductName);
 
-    if(!user){
-        const err = new Error('Error');
-        err.statusCode = 400;
-        throw err;
-    }
-    return user
+    return productName
 };
 
-module.exports = {searchProducT};
+module.exports = {searchProductByName};
