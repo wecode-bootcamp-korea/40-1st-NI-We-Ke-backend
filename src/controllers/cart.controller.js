@@ -13,14 +13,39 @@ const createCart = async (req, res) => {
     res.status(err.statusCode || 401).json({ message: err.message });
   }
 };
-//먼저생각을 해보자. cart에 들어있는 모든 아이템들의 정보를 가져온다고 생각했을때
-//
 
 const getCartsByUserId = async (req, res) => {
   try {
     const userId = req.user.id;
 
     const result = await cartService.getCartsByUserId(userId);
+
+    return res.status(200).json({ message: result });
+  } catch (err) {
+    res.status(err.statusCode || 401).json({ message: err.message });
+  }
+};
+
+//(완료)장바구니 모두 지우기
+// const deleteCartsAll = async (req, res) => {
+//   try {
+//     const userId = req.user.id;
+
+//     const result = await cartService.deleteCartsAll(userId);
+
+//     return res.status(204).json({ message: result });
+//   } catch (err) {
+//     res.status(err.statusCode || 401).json({ message: err.message });
+//   }
+// };
+
+//
+const deleteCartsById = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { cartId } = req.params;
+
+    const result = await cartService.deleteCartsById(userId, cartId);
 
     return res.status(200).json({ message: result });
   } catch (err) {
@@ -49,4 +74,8 @@ const getCartsByUserId = async (req, res) => {
 //   }
 // };
 
-module.exports = { createCart, getCartsByUserId };
+module.exports = {
+  createCart,
+  getCartsByUserId,
+  deleteCartsById,
+};

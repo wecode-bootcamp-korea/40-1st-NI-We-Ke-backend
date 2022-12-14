@@ -46,7 +46,37 @@ const getCartsByUserId = async (userId) => {
   );
 };
 
+//userId가 접근해서
+//carts.id를 선택해서 delete 하거나
+// -> /carts/:id 를 받아야할 것 같은데
+//carts.id를 전체 delete 할 수 있다.
+
+//(완료)장바구니 모두 삭제
+// const deleteCartsAll = async (userId) => {
+//   return await appDataSource.query(
+//     `DELETE
+//     FROM carts c
+//     WHERE c.user_id = ?
+//     `,
+//     [userId]
+//   );
+// };
+
+//장바구니 선택 삭제
+// 1)userId로 장바구니에 접근한다음
+// 2)클라이언트가 전송한 cartId 마다 클릭하면 삭제를 하고 싶다.
+const deleteCartsById = async (userId, cartId) => {
+  return await appDataSource.query(
+    `DELETE 
+    FROM carts c
+    WHERE c.user_id =? AND c.id=?
+    `,
+    [userId, cartId]
+  );
+};
+
 module.exports = {
   createCart,
   getCartsByUserId,
+  deleteCartsById,
 };
