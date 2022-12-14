@@ -1,4 +1,4 @@
-const searhProductDao = require("../models/product.models");
+const searhProductDao = require("../models/product.dao");
 
 const searchProductByName = async(productNames) => {
     const productName = await searhProductDao.getProductByName (productNames);
