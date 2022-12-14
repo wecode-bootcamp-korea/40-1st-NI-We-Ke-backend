@@ -1,22 +1,20 @@
-const productService = require("../services/product.service");
+const searchService = require('../services/product.service');
 
-const searchProductByName = async(req,res)=> {
+const getProductsByCategoryId  = async(req,res) => {
     try{
-        const { productName } = req.query
+        const categoryId = req.params.categories_name;
 
-        
-
-        if(!productName){
-            throw new Error("No Name Error")
+        if(!categoryId) {
+            throw new Error("Key Error")
         }
-
-        const result = await productService.searchProductByName(productName);
+        const result = await searchService.getProductsByCategoryId (categoryId);
 
         return res.status(200).json({message : result})
-    }catch (err){
+    } catch (err) {
+        
         res.status(err.statusCode || 400).json({message : err.message});
     }
+    
 };
 
-
-module.exports= { searchProductByName };
+module.exports = {getProductsByCategoryId };
