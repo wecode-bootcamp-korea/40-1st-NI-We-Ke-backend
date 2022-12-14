@@ -16,14 +16,13 @@ const createCart = async (req, res) => {
 //먼저생각을 해보자. cart에 들어있는 모든 아이템들의 정보를 가져온다고 생각했을때
 //
 
-const getCart = async (req, res) => {
+const getCartsByUserId = async (req, res) => {
   try {
-    const { productoptionId, quantity } = req.body;
     const userId = req.user.id;
 
-    await cartService.getCart(productoptionId, quantity, userId);
+    const result = await cartService.getCartsByUserId(userId);
 
-    res.status(201).json({ message: " Whole products added in Cart " });
+    return res.status(200).json({ message: result });
   } catch (err) {
     res.status(err.statusCode || 401).json({ message: err.message });
   }
@@ -50,4 +49,4 @@ const getCart = async (req, res) => {
 //   }
 // };
 
-module.exports = { createCart, getCart };
+module.exports = { createCart, getCartsByUserId };

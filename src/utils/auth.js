@@ -6,7 +6,7 @@ const userDao = require("../models/user.dao");
 
 const tokenRequired = async (req, res, next) => {
   const { accesstoken } = req.headers; //header에 토큰을 가져올 것.headers의 accesstoken을 가져오는 것이라, accessToken이라고 치면 오류가 날 수 있음
-  console.log(req.headers.accesstoken); //=> 토큰 가져오는 것까지 성공!!
+  //console.log(req.headers.accesstoken); //=> 토큰 가져오는 것까지 성공!!
 
   if (!accesstoken) {
     //accessToken이 없다면

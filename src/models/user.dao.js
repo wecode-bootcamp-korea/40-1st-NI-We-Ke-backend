@@ -32,6 +32,7 @@ const getUserByEmail = async (email) => {
 
 const getUserById = async (userId) => {
   const [user] = await appDataSource.query(
+    //객체로 들어오는 user의 정보를 풀어준다는 javascript 문법임.
     `
       SELECT 
         u.id
