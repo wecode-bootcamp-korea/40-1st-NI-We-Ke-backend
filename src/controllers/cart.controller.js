@@ -1,5 +1,4 @@
 const cartService = require("../services/cart.service");
-//const { tokenRequired } = require("../utils/auth");
 
 const createCart = async (req, res) => {
   try {
@@ -26,20 +25,6 @@ const getCartsByUserId = async (req, res) => {
   }
 };
 
-//(완료)장바구니 모두 지우기
-// const deleteCartsAll = async (req, res) => {
-//   try {
-//     const userId = req.user.id;
-
-//     const result = await cartService.deleteCartsAll(userId);
-
-//     return res.status(204).json({ message: result });
-//   } catch (err) {
-//     res.status(err.statusCode || 401).json({ message: err.message });
-//   }
-// };
-
-//
 const deleteCartsById = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -52,27 +37,6 @@ const deleteCartsById = async (req, res) => {
     res.status(err.statusCode || 401).json({ message: err.message });
   }
 };
-
-//이미 token을 확인하는 과정에서 userId의 정보가 들어왔었던 것이고
-//우리는 클라이언트로부터 넣을 정보만 body로 받으면 되는 것이다.
-//그리고 auth.js에서 user의 정보를 req.user에 넣어주었고
-//userId라는 변수에 그 값을 다시 저장한 것이다.
-//그리고 다음 logic으로 넘어가주면 되는 것.
-
-// const removeCart = async (req, res) => {
-//   try {
-//     const { userId, userToken } = req.body;
-
-//     if (!userId === !userToken) {
-//       throw new Error("Token Error");
-//     }
-//     await cartService.removeCart(userId, userToken);
-
-//     return res.status(201).json({ message: " Removed from Cart! " });
-//   } catch (err) {
-//     res.status(err.statusCode || 400).json({ message: err.message });
-//   }
-// };
 
 module.exports = {
   createCart,
