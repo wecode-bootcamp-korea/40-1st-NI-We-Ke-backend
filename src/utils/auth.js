@@ -5,10 +5,10 @@ const userDao = require("../models/user.dao");
 //이 미들웨어를 정의하자면!
 
 const tokenRequired = async (req, res, next) => {
-  const { accesstoken } = req.headers; //header에 토큰을 가져올 것.headers의 accesstoken을 가져오는 것이라, accessToken이라고 치면 오류가 날 수 있음
-  //console.log(req.headers.accesstoken); //=> 토큰 가져오는 것까지 성공!!
+  const { Authorization } = req.headers;
+  //accesstoken을 받아오는 것은 {Authorizaiton} 으로 보통 받아주는 것이 맞다.
 
-  if (!accesstoken) {
+  if (!Authorization) {
     //accessToken이 없다면
     const error = new Error(" AccessToken Not Existed ");
     error.statusCode = 401;
@@ -16,7 +16,7 @@ const tokenRequired = async (req, res, next) => {
     return next(error);
   }
 
-  const userId = await jwt.verify(accesstoken, process.env.JWT_SECRET).userId;
+  const userId = await jwt.verify(Authorization, process.env.JWT_SECRET).userId;
 
   const user = await userDao.getUserById(userId);
 
