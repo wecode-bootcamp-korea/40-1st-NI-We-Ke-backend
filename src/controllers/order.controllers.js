@@ -1,17 +1,18 @@
-const postOrderService = require('../services/order.service');
+const orderService = require('../services/order.service');
 
-const postOrder = async (req,res) => {
+const createOrder = async (req,res) => {
     try{
         
-        const { user_id, order_number, status_id,  price, quantity } = req.body;
+        const {  price, quantity } = req.body;
+        const userId = req.user.id
 
-        if( !order_number || !status_id || !price || !quantity ) {
+        if( !price || !quantity ) {
             throw new Error("Key Error")
         }
         
-        await postOrderService.postOrder(user_id, order_number ,status_id, price, quantity);
+        await orderService.createOrder( userId, price, quantity);
 
-        return res.status(200).json({message:"Add Order Success!!"})
+        return res.status(201).json({message:"Add Order Success!!"})
     }catch (err) {
         console.log(err)
         res.status(err.statusCode || 400).json({mesaage : err.mesaage});
@@ -20,5 +21,5 @@ const postOrder = async (req,res) => {
     
 };
 
-module.exports = {postOrder};
+module.exports = {createOrder};
 

@@ -1,13 +1,12 @@
 const orderDao = require('../models/order.dao');
+const crypto = require('crypto')
 
-const postOrder = async(user_id, order_number , status_id , price ,quantity) =>{
-    const order = await orderDao.createOrder(user_id, order_number , status_id , price ,quantity);
+//crypto 는 node.js 자체 모듈이다//
 
-    // if(order) {
-    //     const err = new Error("duplicated order");
-    //     err.statusCode = 400;
-    //     throw err;
-    // }
+const createOrder = async(userId, price ,quantity) =>{
+    const orderNumber = crypto.randomBytes(20).toString('hex');
+
+    return await orderDao.createOrder(userId, orderNumber , price ,quantity)
 }
 
-module.exports = { postOrder };
+module.exports = { createOrder };
