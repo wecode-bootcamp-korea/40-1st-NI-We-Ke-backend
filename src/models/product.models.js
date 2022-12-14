@@ -1,9 +1,9 @@
 const {appDataSource} = require("./data-source");
 
-const getProductByName  = async(ProductName) => {
+const getProductByName  = async(productName) => {
     const word = {
         toSqlString: function() {
-            return ProductName
+            return productName
         }
     }
     
