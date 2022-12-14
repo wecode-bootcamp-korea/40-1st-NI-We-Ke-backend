@@ -1,9 +1,11 @@
-const searhProductDao = require("../models/product.dao");
+const productDao = require('../models/product.dao');
 
-const searchProductByName = async(productNames) => {
-    const productName = await searhProductDao.getProductByName (productNames);
-
-    return productName
+const getProductsByCategoryId  = async(categoryId) => {
+    return productDao.getProductsByCategoryId(categoryId);
 };
 
-module.exports = {searchProductByName};
+const getProductByName = async(productNames) => {
+    return productDao.getProductByName(productNames);
+};
+
+module.exports = {getProductsByCategoryId, getProductByName }
