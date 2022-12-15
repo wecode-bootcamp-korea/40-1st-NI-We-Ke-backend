@@ -7,13 +7,13 @@ const getDrawByProductDrawColumn = async (draw) => {
         p.id,
         p.name productName, 
         c.name,
-        (
+      (
           SELECT
-           image_url
-          FROM product_option_images
-          WHERE product_option_id = po.id
-          LIMIT 1
-       ) image_url
+          image_url
+        FROM product_option_images poi
+        WHERE product_option_id = poi.id
+        LIMIT 1
+      ) image_url
     FROM products p
     JOIN categories c ON c.id = p.category_id
     WHERE p.draw = ${draw}
