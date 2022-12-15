@@ -1,6 +1,6 @@
 const { appDataSource } = require("./data-source");
 
-const getDrawByProductDrawColumn = async () => {
+const getDrawByProductDrawColumn = async (draw) => {
   return await appDataSource.query(
     `
     SELECT
@@ -9,12 +9,9 @@ const getDrawByProductDrawColumn = async () => {
         c.name 
     FROM products p
     JOIN categories c ON c.id = p.category_id
-    WHERE p.draw = ?
+    WHERE p.draw = ${draw}
     `
   );
 };
 
 module.exports = { getDrawByProductDrawColumn };
-
-// draw 버튼을 누르면 나와야하는 아이들이잖아,
-// product 테이블에서 draw 칼럼에 1 걸려있는 애들 모두다!
