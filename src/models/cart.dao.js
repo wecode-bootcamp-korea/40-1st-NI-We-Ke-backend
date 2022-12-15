@@ -1,7 +1,7 @@
 const { appDataSource } = require("./data-source");
 
-const createCart = async (productoptionId, quantity, userId) => {
-  await appDataSource.query(
+const createCart = async (productOptionId, quantity, userId) => {
+  return appDataSource.query(
     `
     INSERT INTO carts(
       user_id, 
@@ -10,20 +10,41 @@ const createCart = async (productoptionId, quantity, userId) => {
     ) VALUES (
      ?,?,?
     )`,
-    [userId, productoptionId, quantity]
+    [userId, productOptionId, quantity]
+  );
+};
+
+const getCartByProductOptionId = async (userId, productOptionId) => {
+  return appDataSource.query(
+    `
+    SELECT
+      c.id
+    FROM carts c
+    WHERE c.user_id = ?
+    AND   c.product_option_id = ?
+  `,
+    [userId, productOptionId]
   );
 };
 
 const getCartsByUserId = async (userId) => {
   return appDataSource.query(
-    `SELECT 
-        c.id,
+    `SELECT DISTINCT
+        c.id cartId,
         c.quantity,
+        po.id as productOptionId,
         po.price,
         col.color,
         s.size,
-        p.name,
-        ca.name
+        p.name productName,
+        ca.name categoryName,
+        (
+           SELECT
+            image_url
+           FROM product_option_images
+           WHERE product_option_id = po.id
+           LIMIT 1
+        ) image_url
     FROM carts c 
     JOIN product_options po ON po.id = c.product_option_id
     JOIN products p ON p.id = po.product_id
@@ -37,11 +58,23 @@ const getCartsByUserId = async (userId) => {
   );
 };
 
+const updateCart = async (productOptionId, quantity, userId) => {
+  return appDataSource.query(
+    `
+    UPDATE carts c
+    SET c.quantity = c.quantity + ?
+    WHERE c.product_option_id = ?
+    AND c.user_id = ?
+  `,
+    [quantity, productOptionId, userId]
+  );
+};
+
 const deleteCartsById = async (userId, cartId) => {
   return await appDataSource.query(
     `DELETE 
     FROM carts c
-    WHERE c.id = ${cartId};
+    WHERE c.user_id =? AND c.id = ? 
     `,
     [userId, cartId]
   );
@@ -50,5 +83,7 @@ const deleteCartsById = async (userId, cartId) => {
 module.exports = {
   createCart,
   getCartsByUserId,
+  getCartByProductOptionId,
+  updateCart,
   deleteCartsById,
 };
