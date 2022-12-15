@@ -1,14 +1,14 @@
-const {appDataSource} = require("./data-source");
+const { appDataSource } = require("./data-source");
 
-const getProductByName  = async(productName) => {
-    const word = {
-        toSqlString: function() {
-            return productName
-        }
-    }
-    
-    return await appDataSource.query(
-        `
+const getProductByName = async (productName) => {
+  const word = {
+    toSqlString: function () {
+      return productName;
+    },
+  };
+
+  return await appDataSource.query(
+    `
         SELECT
             p.id,
             p.name,
@@ -21,13 +21,14 @@ const getProductByName  = async(productName) => {
         JOIN product_option_images poi ON poi.product_option_id = po.id
         WHERE p.name 
         LIKE '%?%';
-        `, [word]);
-    };
-        
+        `,
+    [word]
+  );
+};
 
-const getProductsByCategoryId = async(categoryId) => {
-    return await appDataSource.query(
-        `
+const getProductsByCategoryId = async (categoryId) => {
+  return await appDataSource.query(
+    `
     SELECT
 	    p.id,
 	    p.name,
@@ -39,7 +40,9 @@ const getProductsByCategoryId = async(categoryId) => {
     JOIN product_options po ON po.product_id = p.id
     JOIN product_option_images poi ON poi.product_option_id = po.id
     WHERE p.category_id = ?;
-    `, [categoryId]);
+    `,
+    [categoryId]
+  );
 };
-    
-module.exports = {getProductsByCategoryId, getProductByName};
+
+module.exports = { getProductsByCategoryId, getProductByName };
