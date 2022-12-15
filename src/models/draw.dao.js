@@ -5,7 +5,7 @@ const getDrawByProductDrawColumn = async (draw) => {
     `
     SELECT
         p.id,
-        p.name, 
+        p.name productName, 
         c.name 
     FROM products p
     JOIN categories c ON c.id = p.category_id
