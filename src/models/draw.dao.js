@@ -9,7 +9,7 @@ const getDrawByProductDrawColumn = async () => {
         c.name 
     FROM products p
     JOIN categories c ON c.id = p.category_id
-    WHERE p.draw = 1
+    WHERE p.draw = ?
     `
   );
 };

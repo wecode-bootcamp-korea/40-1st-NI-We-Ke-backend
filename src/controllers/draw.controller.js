@@ -2,7 +2,7 @@ const drawService = require("../services/draw.service");
 
 const getDrawByProductDrawColumn = async (req, res) => {
   try {
-    const draw = req.params;
+    const draw = req.body;
     console.log(draw);
 
     //현재 이 draw가 빈 객체다 {} 1이 나와야하는데 ㅠㅠ

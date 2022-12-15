@@ -1,8 +1,7 @@
 const drawDao = require("../models/draw.dao");
 
-const getDrawByProductDrawColumn = async (productDraw) => {
-  console.log(getDrawByProductDrawColumn);
-  return await drawDao.getDrawByProductDrawColumn(productDraw);
+const getDrawByProductDrawColumn = async () => {
+  return await drawDao.getDrawByProductDrawColumn();
 };
 
 module.exports = { getDrawByProductDrawColumn };
