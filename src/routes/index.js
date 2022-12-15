@@ -10,6 +10,4 @@ routes.use("/auth", authRouter);
 routes.use('/products', productRouter);
 routes.use('/orders' , orderRouter);
 
-
-
 module.exports = { routes };
