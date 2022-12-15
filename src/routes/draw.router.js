@@ -4,6 +4,6 @@ const drawController = require("../controllers/draw.controller");
 
 const drawRouter = express.Router();
 
-drawRouter.get("/:id", drawController.getDrawByProductDrawColumn);
+drawRouter.get("/products", drawController.getProductsInDraw);
 
 module.exports = { drawRouter };

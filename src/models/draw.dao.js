@@ -1,6 +1,11 @@
 const { appDataSource } = require("./data-source");
 
-const getDrawByProductDrawColumn = async (draw) => {
+const DrawStatus = Object.freeze({
+  DRAW: 1,
+  NONE_DRAW: 0,
+});
+
+const getProductsInDraw = async () => {
   return await appDataSource.query(
     `
     SELECT
@@ -16,9 +21,9 @@ const getDrawByProductDrawColumn = async (draw) => {
       ) image_url
     FROM products p
     JOIN categories c ON c.id = p.category_id
-    WHERE p.draw = ${draw}
+    WHERE p.draw = ${DrawStatus.DRAW}
     `
   );
 };
 
-module.exports = { getDrawByProductDrawColumn };
+module.exports = { getProductsInDraw };

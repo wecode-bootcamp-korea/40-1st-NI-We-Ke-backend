@@ -1,15 +1,8 @@
 const drawService = require("../services/draw.service");
 
-const getDrawByProductDrawColumn = async (req, res) => {
+const getProductsInDraw = async (req, res) => {
   try {
-    const draw = req.params.id;
-    console.log(draw);
-
-    if (!draw) {
-      throw new Error("Key Error");
-    }
-
-    const result = await drawService.getDrawByProductDrawColumn(draw);
+    const result = await drawService.getProductsInDraw();
 
     return res.status(200).json({ message: result });
   } catch (err) {
@@ -17,4 +10,4 @@ const getDrawByProductDrawColumn = async (req, res) => {
   }
 };
 
-module.exports = { getDrawByProductDrawColumn };
+module.exports = { getProductsInDraw };
