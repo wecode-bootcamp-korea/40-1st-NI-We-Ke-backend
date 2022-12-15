@@ -40,10 +40,53 @@ const getProductByName = async (productName) => {
         JOIN product_option_images poi ON poi.product_option_id = po.id
         WHERE p.name 
         LIKE '%?%';
-        `,
-    [word]
-  );
-};
+        `, [word]);
+    };
+        
+
+
+const getProductByIconId = async(iconId) => {
+    return await appDataSource.query(
+        `
+        SELECT
+            p.name productName,
+            c.color,
+            po.price,
+            poi.image_url,
+            i.name iconName
+        FROM products p
+        JOIN product_options po ON p.id = po.product_id
+        JOIN colors c ON po.color_id = c.id
+        JOIN product_option_images poi ON po.id = poi.product_option_id
+        JOIN icons i ON p.icon_id = i.id
+        WHERE p.icon_id = ?;
+        ` , [iconId]
+    );
+}
+
+const getAllProduct = async(allProduct) => {
+    const words = {
+        toSqlString: function() {
+            return allProduct
+        }
+    }
+    return await appDataSource.query(
+        `
+        SELECT 
+        p.id,
+        p.name,
+        po.price,
+        JSON_ARRAYAGG(poi.image_url) image_urls
+        FROM products p
+        JOIN product_options po ON p.id = po.product_id
+        JOIN product_option_images poi ON po.id = poi.product_option_id
+        WHERE p.name
+        LIKE  '%?%'
+        GROUP BY p.id, p.name, po.price
+        ` , [words]
+    );
+}
+
 
 const getDetailByProductId = async (productId) => {
   const [product] = await appDataSource.query(
@@ -98,8 +141,4 @@ const getDetailByProductId = async (productId) => {
   return product;
 };
 
-module.exports = {
-  getProductsByCategoryId,
-  getProductByName,
-  getDetailByProductId,
-};
+module.exports = {getProductsByCategoryId, getProductByName , getProductByIconId , getAllProduct , getDetailByProductId};
