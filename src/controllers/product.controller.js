@@ -17,6 +17,23 @@ const getProductsByCategoryId  = async(req,res) => {
     
 };
 
+const getDetailByProductId = async(req,res) => {
+    try{
+
+        const productId = req.params.product_ID;
+
+        if(!productId) {
+            throw new Error("No Product Error")
+        }
+        const result = await productService.getDetailByProductId(productId)
+
+        return res.status(200).json(result)
+    }catch (err){
+    
+    res.status(err.statusCode ||400).json({message: err.message});
+    }
+}
+
 const getProductByName = async(req,res)=> {
     try{
         const { productName } = req.query
@@ -35,4 +52,4 @@ const getProductByName = async(req,res)=> {
     }
 };
 
-module.exports = {getProductsByCategoryId, getProductByName };
+module.exports = {getProductsByCategoryId, getProductByName  , getDetailByProductId};

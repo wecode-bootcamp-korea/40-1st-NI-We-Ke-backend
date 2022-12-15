@@ -9,7 +9,7 @@ const routes = express.Router();
 
 routes.use("/auth", authRouter);
 routes.use("/products", productRouter);
-routes.use("/cart", cartRouter);
+routes.use("/carts", cartRouter);
 routes.use("/orders", orderRouter);
 
 module.exports = { routes };

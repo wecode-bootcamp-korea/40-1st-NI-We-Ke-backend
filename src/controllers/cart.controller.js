@@ -28,9 +28,7 @@ const getCartsByUserId = async (req, res) => {
 const deleteCartsById = async (req, res) => {
   try {
     const userId = req.user.id;
-    //=> token 을 통해 userId를 1로 잘 가져옴
     const cartId = req.params.id;
-    //=> cartId를 9로 잘 가져왔다
 
     const result = await cartService.deleteCartsById(userId, cartId);
 
