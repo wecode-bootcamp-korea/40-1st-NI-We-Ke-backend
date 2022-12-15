@@ -5,7 +5,7 @@ const wishlistController = require("../controllers/wishlist.controller");
 
 const wishlistRouter = express.Router();
 
-wishlistRouter.get("", tokenRequired, wishlistController.createWishlist);
-wishlistRouter.post("", tokenRequired, wishlistController.getWishlistByUserId);
+wishlistRouter.get("", tokenRequired, wishlistController.getWishlistByUserId);
+wishlistRouter.post("", tokenRequired, wishlistController.createWishlist);
 
 module.exports = { wishlistRouter };

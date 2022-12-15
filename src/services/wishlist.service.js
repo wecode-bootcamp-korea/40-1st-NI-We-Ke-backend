@@ -4,11 +4,11 @@ const createWishlist = async (productOptionId, userId) => {
   return await wishlistDao.createWishlist(productOptionId, userId);
 };
 
-const getWishlistByUserID = async (userId) => {
-  return wishlistDao.getWishlistByUserID(userId);
+const getWishlistByUserId = async (userId) => {
+  return wishlistDao.getWishlistByUserId(userId);
 };
 
 module.exports = {
   createWishlist,
-  getWishlistByUserID,
+  getWishlistByUserId,
 };
