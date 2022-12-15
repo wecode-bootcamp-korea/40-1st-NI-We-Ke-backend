@@ -75,12 +75,13 @@ const getAllProduct = async(allProduct) => {
         p.id,
         p.name,
         po.price,
-        poi.image_url
+        JSON_ARRAYAGG(poi.image_url) image_urls
         FROM products p
         JOIN product_options po ON p.id = po.product_id
         JOIN product_option_images poi ON po.id = poi.product_option_id
         WHERE p.name
-        LIKE  '%?%';
+        LIKE  '%?%'
+        GROUP BY p.id, p.name, po.price
         ` , [words]
     );
 }
