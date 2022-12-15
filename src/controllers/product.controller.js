@@ -5,7 +5,7 @@ const getProductsByCategoryId  = async(req,res) => {
     try{
         
         
-        const categoryId = req.params.categoryName;
+        const categoryId = req.params.categoryId;
 
         if(!categoryId) {
             throw new Error("Key Error")
@@ -26,7 +26,7 @@ const getDetailByProductId = async(req,res) => {
         const productId = req.params.productId;
 
         if(!productId) {
-            throw new Error("No Product Error")
+            throw new Error("Key Error")
         }
         const result = await productService.getDetailByProductId(productId)
 
@@ -44,7 +44,7 @@ const getProductByName = async(req,res)=> {
         
 
         if(!productName){
-            throw new Error("No Name Error")
+            throw new Error("Key Error")
         }
 
         const result = await productService.getProductByName(productName);
@@ -57,7 +57,7 @@ const getProductByName = async(req,res)=> {
 
 const getProductByIconId = async(req,res)=> {
     try{
-        const iconId = req.params.icon_name;
+        const iconId = req.params.iconId;
 
         if(!iconId) {
             throw new Error("Key Error")
@@ -75,7 +75,7 @@ const getAllProduct = async(req,res)=> {
         const {allProduct} = req.query
 
         if(!allProduct){
-            throw new Error("No Name Error")
+            throw new Error("Key Error")
         }
         const result = await productService.getAllProduct(allProduct);
         return res.status(200).json(result)

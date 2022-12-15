@@ -45,17 +45,16 @@ const getProductByName = async (productName) => {
         
 
 
-
 const getProductByIconId = async(iconId) => {
     return await appDataSource.query(
         `
         SELECT
-            p.name,
+            p.name productName,
             c.color,
             po.price,
             poi.image_url,
-            i.name
-        FROM  products p
+            i.name iconName
+        FROM products p
         JOIN product_options po ON p.id = po.product_id
         JOIN colors c ON po.color_id = c.id
         JOIN product_option_images poi ON po.id = poi.product_option_id
@@ -141,7 +140,5 @@ const getDetailByProductId = async (productId) => {
 
   return product;
 };
-
-
 
 module.exports = {getProductsByCategoryId, getProductByName , getProductByIconId , getAllProduct , getDetailByProductId};
