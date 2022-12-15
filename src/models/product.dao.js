@@ -1,5 +1,7 @@
 const {appDataSource} = require('./data-source');
 
+        
+
 const getProductsByCategoryId = async(categoryId) => {
     return await appDataSource.query(
         `
@@ -88,4 +90,5 @@ const getDetailByProductId = async (productId) => {
     return product
 }
     
-module.exports = {getProductsByCategoryId, getProductByName, getDetailByProductId};
+module.exports = {getProductsByCategoryId, getProductByName, getDetailByProductId , getProductByName};
+

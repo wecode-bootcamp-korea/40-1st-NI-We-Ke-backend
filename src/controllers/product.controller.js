@@ -34,7 +34,22 @@ const getDetailByProductId = async(req,res) => {
     }
 }
 
+const getProductByName = async(req,res)=> {
+    try{
+        const { productName } = req.query
 
+        
 
+        if(!productName){
+            throw new Error("No Name Error")
+        }
 
-module.exports = {getProductsByCategoryId, getDetailByProductId };
+        const result = await productService.getProductByName(productName);
+
+        return res.status(200).json({message : result})
+    }catch (err){
+        res.status(err.statusCode || 400).json({message : err.message});
+    }
+};
+
+module.exports = {getProductsByCategoryId, getProductByName  , getDetailByProductId};
