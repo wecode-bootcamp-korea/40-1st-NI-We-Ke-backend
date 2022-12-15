@@ -2,7 +2,7 @@ const productService = require('../services/product.service');
 
 const getProductsByCategoryId  = async(req,res) => {
     try{
-        const categoryId = req.params.categories_name;
+        const categoryId = req.params.categoryName;
 
         if(!categoryId) {
             throw new Error("Key Error")
@@ -20,7 +20,7 @@ const getProductsByCategoryId  = async(req,res) => {
 const getDetailByProductId = async(req,res) => {
     try{
 
-        const productId = req.params.product_ID;
+        const productId = req.params.productId;
 
         if(!productId) {
             throw new Error("No Product Error")
