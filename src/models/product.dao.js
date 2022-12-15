@@ -1,10 +1,8 @@
-const {appDataSource} = require('./data-source');
+const { appDataSource } = require("./data-source");
 
-        
-
-const getProductsByCategoryId = async(categoryId) => {
-    return await appDataSource.query(
-        `
+const getProductsByCategoryId = async (categoryId) => {
+  return await appDataSource.query(
+    `
     SELECT
 	    p.id,
 	    p.name,
@@ -16,18 +14,20 @@ const getProductsByCategoryId = async(categoryId) => {
     JOIN product_options po ON po.product_id = p.id
     JOIN product_option_images poi ON poi.product_option_id = po.id
     WHERE p.category_id = ?
-    `, [categoryId]);
+    `,
+    [categoryId]
+  );
 };
 
-const getProductByName  = async(productName) => {
-    const word = {
-        toSqlString: function() {
-            return productName
-        }
-    }
-    
-    return await appDataSource.query(
-        `
+const getProductByName = async (productName) => {
+  const word = {
+    toSqlString: function () {
+      return productName;
+    },
+  };
+
+  return await appDataSource.query(
+    `
         SELECT
             p.id,
             p.name,
@@ -40,11 +40,14 @@ const getProductByName  = async(productName) => {
         JOIN product_option_images poi ON poi.product_option_id = po.id
         WHERE p.name 
         LIKE '%?%';
-        `, [word]);
+        `,
+    [word]
+  );
 };
 
 const getDetailByProductId = async (productId) => {
-    const [product] = await appDataSource.query(`
+  const [product] = await appDataSource.query(
+    `
         SELECT
             p.id,
             p.name,
@@ -56,9 +59,12 @@ const getDetailByProductId = async (productId) => {
         JOIN product_options po ON p.id=po.product_id
         JOIN sizes ON sizes.id = po.size_id
         WHERE p.id = ?
-    `, [ productId ]) 
+    `,
+    [productId]
+  );
 
-    const images = await appDataSource.query(`
+  const images = await appDataSource.query(
+    `
         SELECT
             poi.id imageId,
             poi.image_url imageUrl
@@ -66,9 +72,12 @@ const getDetailByProductId = async (productId) => {
         JOIN product_options po ON po.id = poi.product_option_id
         JOIN products p ON p.id = po.product_id
         WHERE p.id = ?
-    `, [productId])
+    `,
+    [productId]
+  );
 
-     const reviews = await appDataSource.query(`
+  const reviews = await appDataSource.query(
+    `
       SELECT
         re.id,
             re.review,
@@ -79,16 +88,18 @@ const getDetailByProductId = async (productId) => {
         JOIN products p ON p.id = po.product_id
         JOIN users u ON u.id = re.user_id
         WHERE p.id = ?
-     ` , [productId])
+     `,
+    [productId]
+  );
 
-    
+  product.images = images;
+  product.reviews = reviews;
 
-    product.images = images
-    product.reviews = reviews
-    
+  return product;
+};
 
-    return product
-}
-    
-module.exports = {getProductsByCategoryId, getProductByName, getDetailByProductId , getProductByName};
-
+module.exports = {
+  getProductsByCategoryId,
+  getProductByName,
+  getDetailByProductId,
+};

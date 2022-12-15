@@ -6,3 +6,5 @@ CREATE TABLE statuses (
 -- migrate:down
 DROP TABLE statuses;
 
+
+
