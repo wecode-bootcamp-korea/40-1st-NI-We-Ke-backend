@@ -79,7 +79,7 @@ const getDetailByProductId = async (productId) => {
         WHERE p.id = ?
      ` , [productId])
 
-    console.log(images)
+    
 
     product.images = images
     product.reviews = reviews
