@@ -2,10 +2,10 @@ const wishlistService = require("../services/wishlist.service");
 
 const createWishlist = async (req, res) => {
   try {
-    const { productoptionId } = req.body;
+    const { productOptionId } = req.body;
     const userId = req.user.id;
 
-    await wishlistService.createWishlist(productoptionId, userId);
+    await wishlistService.createWishlist(productOptionId, userId);
 
     res.status(201).json({ message: " Wishlist Created!" });
   } catch (err) {

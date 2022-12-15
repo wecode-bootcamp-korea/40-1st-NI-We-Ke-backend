@@ -17,7 +17,7 @@ const getWishlistByUserId = async (userId) => {
   return appDataSource.query(
     `SELECT DISTINCT
         w.id,
-        po.id as productoptionId,
+        po.id as productOptionId,
         col.color,
         s.size,
         p.name productName,
