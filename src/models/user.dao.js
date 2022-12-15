@@ -9,7 +9,7 @@ const createUser = async (email, password) => {
     ) VALUES (
       ?,
       ?
-    )
+    ) 
     `,
     [email, password]
   );
@@ -30,7 +30,6 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-
 const getUserById = async (userId) => {
   const [user] = await appDataSource.query(
     `
@@ -44,4 +43,4 @@ const getUserById = async (userId) => {
   return user;
 };
 
-module.exports = { createUser, getUserByEmail , getUserById };
+module.exports = { createUser, getUserByEmail, getUserById };
