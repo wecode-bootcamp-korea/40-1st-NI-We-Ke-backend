@@ -28,22 +28,17 @@ const getDetailByProductId = async (productId) => {
     //         WHERE p.id = ? AND 
     //     `, [productId]
     // );
-    return await appDataSource.query(
-            `
-            SELECT 
-                p.id,
-                p.name,
-                c.name,
-                po.price,
-                sizes.size
-                FROM products p
-                JOIN categories c ON c.id=p.category_id
-                JOIN product_options po ON p.id=po.product_id
-                JOIN product_option_images poi ON po.id = poi.product_option_id
-                JOIN sizes ON sizes.id = po.size_id
-                WHERE p.id = ?;
-            `, [productId]
-        );
+    const images = await appDataSource.query(
+        `
+        SELECT 
+        product_option_images.image.image_url
+
+        `
+    )
+    
 }
 
 module.exports = {getDetailByProductId};
+
+
+
