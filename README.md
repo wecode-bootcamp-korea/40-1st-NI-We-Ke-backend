@@ -6,13 +6,13 @@
 > - 개발인원 : Frontend 3명(서혜선,권오규,김학진), Backend 2명(원승현,박진주)
 
 ## 프로젝트 선정이유
-* 세계 의류 업계 매출 1위의 나이키의 공식사이트 
+* 세계 의류 업계 매출 1위의 나이키의 공식사이트는 타 이커머스 웹사이트에 비해 특별한 기능이 없었습니다. 상품을 판매를 중심으로 웹사이트를 구성한 것이 아닌, 나이키 브랜드 가치 그자체를 담아낸 웹사이트가 흥미로웠습니다. 
 
 ## 데모영상 
 * https://www.youtube.com/watch?v=Ef0Vk5RPGYA
 
 ## 적용 기술
-> - Front-End : React.js
+> - Front-End : React.js, sass, CRA & Router
 > - Back-End : Node.js, MySQL 
 
 ## 구현 기능 
